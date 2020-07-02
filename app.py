@@ -16,11 +16,11 @@ connection = pymysql.connect(
 
 try:
     # Run a Query
-    with connection.cursor() as cursor:
-        sql = "SELECT * FROM Artist;"
+    with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+        sql = "SELECT * FROM Genre;"
         cursor.execute(sql)  # execute that SQL command there and get result back
-        result = cursor.fetchall()  # Getting the data back
-        print(result)
+        for row in cursor:
+            print(row)
 
 finally:
     # Close the connection, regardless of wheteher the above was successful
